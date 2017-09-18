@@ -7,9 +7,13 @@ import {
   Button
 } from "react-bootstrap";
 
-export default class SearchRecipes extends Component {
+import { connect } from "react-redux";
+import { setRecipes } from "../actions";
+
+class SearchRecipes extends Component {
   constructor() {
     super();
+
     this.state = {
       ingredients: "",
       dish: ""
@@ -17,34 +21,41 @@ export default class SearchRecipes extends Component {
   }
   search() {
     let { ingredients, dish } = this.state;
-
-    // let ingredients = this.state.ingredients;
-    // let dish = this.state.dish;
-
     const url = `http://www.recipepuppy.com/api/?i=${ingredients}&q=${dish}`;
-    console.log('state', this.state,"url", url);
+
+    fetch(url, {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(json => {
+        this.props.setRecipes(json.results);
+      });
   }
+
   render() {
     return (
       <Form inline>
         <FormGroup>
           <ControlLabel>Ingredients</ControlLabel>{" "}
-          <FormControl 
+          <FormControl
             type="text"
-            placeholder="Chicken, Salsa" 
-            onChange={event => this.setState({ingredients: event.target.value})}
-            />
+            placeholder="Chicken, Salsa"
+            onChange={event =>
+              this.setState({ ingredients: event.target.value })}
+          />
         </FormGroup>
         <FormGroup>
           <ControlLabel>Dish</ControlLabel>{" "}
-          <FormControl 
+          <FormControl
             type="text"
             placeholder="Tacos"
-            onChange={event => this.setState({ dish: event.target.value })} 
-            />
+            onChange={event => this.setState({ dish: event.target.value })}
+          />
         </FormGroup>{" "}
         <Button onClick={() => this.search()}>Submit</Button>
       </Form>
     );
   }
 }
+
+export default connect(null, { setRecipes })(SearchRecipes);
