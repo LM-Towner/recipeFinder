@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import { connect } from 'react-redux';
+import RecipeItem  from './RecipeItem';
 
 class RecipeList extends Component {
   render(){
@@ -9,10 +10,7 @@ class RecipeList extends Component {
        {
          this.props.recipes.map((recipe,key) => {
            return(
-             <div key={key}>
-                <img src={recipe.thumbnail}/>
-             <h4>{recipe.title}</h4>
-           </div>
+            <RecipeItem key={key} recipe={recipe} />
            )
          })
        }
