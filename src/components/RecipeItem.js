@@ -12,25 +12,25 @@ class RecipeItem extends Component {
 
   favorite(recipe) {
     this.props.favoriteRecipes(recipe);
-    this.setState({
-      favorited: true
-    });
+    this.setState({ favorited: true });
   }
 
   render() {
     let { recipe } = this.props;
     return (
       <div className="recipe-item">
-        {this.state.favorited ? (
+        {this.props.favoriteButton ? this.state.favorited ? (
           <div className="star">&#9733;</div>
         ) : (
-          <div onClick={() => this.favorite(recipe)}>
-            <div className="star"> &#9734;</div>
+          <div className="star" onClick={() => this.favorite(recipe)}>
+            &#9734;
           </div>
+        ) : (
+          <div />
         )}
-        <a href={recipe.href}>
-          <h4 className="recipe=text">{recipe.title}</h4>
-        </a>
+
+        <h4 className="recipe-text">{recipe.title}</h4>
+        <a href={recipe.href} />
         <p>{recipe.ingredients}</p>
 
         <img className="recipe-img" src={recipe.thumbnail} alt={recipe.title} />

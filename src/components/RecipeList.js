@@ -10,7 +10,11 @@ class RecipeList extends Component {
        {
          this.props.recipes.map((recipe,key) => {
            return(
-            <RecipeItem key={key} recipe={recipe} />
+            <RecipeItem 
+            key={key} 
+            recipe={recipe}
+            favoriteButton={true}
+             />
            )
          })
        }

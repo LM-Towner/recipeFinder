@@ -8,13 +8,15 @@ class FavoriteRecipeList extends Component {
       <div>
         <h4>Favorite Recipes:</h4>
         <div>
-          {
-          this.props.favoriteRecipes.map((recipe, key) => {
-            return(
-            <RecipeItem key={key} recipe={recipe}/>
-            )
-          })
-          }
+          {this.props.favoriteRecipes.map((recipe, key) => {
+            return (
+              <RecipeItem 
+              key={key} 
+              recipe={recipe}
+              favoriteButton = {false}
+               />
+              );
+          })}
         </div>
       </div>
     );
