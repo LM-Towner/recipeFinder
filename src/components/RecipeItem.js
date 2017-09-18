@@ -4,7 +4,6 @@ class RecipeItem extends Component {
   render() {
     let { recipe } = this.props;
     return (
- 
       <div className="recipe-item">
         <a href={recipe.href}>
           <h4 classname="recipe=text">{recipe.title}</h4>
